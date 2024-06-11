@@ -27,6 +27,8 @@ public class UsuarioService {
         usuario.setUsername(usuario.getUsername());
         usuario.setRoles(usuario.getRoles());
         usuario.setPassword(usuario.getPassword());
+        usuario.setEmail(usuario.getEmail());
+        usuario.setPhone(usuario.getPhone());
 
 
         Usuario usuarioGuardado = usuarioRepository.save(usuario);

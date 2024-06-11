@@ -56,11 +56,11 @@ export class AuthService {
 
     }
 
-    register(username:string,password:string):Observable<any>{
+    register(username:string,password:string, email:string, phone:string):Observable<any>{
       if(!this.http){
         throw new Error('Http client no inicializado');
       }
-      return this.http?.post<any>(`${this.baseUrl}/register`, {username, password})
+      return this.http?.post<any>(`${this.baseUrl}/register`, {username, password, email, phone})
         ?.pipe(
           catchError(this.handleError)
         )
