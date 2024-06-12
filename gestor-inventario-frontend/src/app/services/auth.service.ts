@@ -2,16 +2,24 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {catchError, map, Observable, tap, throwError} from "rxjs";
+import {Usuario} from "../models/usuario";
+import {CookieService} from "ngx-cookie-service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
+  setToken(token: string) {
+    const currentDate = new Date();
+    const expiresAt = new Date(currentDate.getTime() + 8640000);
+    this.cookieService.set('token', token, expiresAt);
+  }
+
   private baseUrl= 'http://localhost:8080/api/auth';
 
 
-  constructor(private http?:HttpClient, private router?:Router) { }
+  constructor(private http:HttpClient, private router:Router, private cookieService:CookieService) { }
 
   /**
    * Método para autenticar a un usuario mediante su username y password.
@@ -29,7 +37,6 @@ export class AuthService {
       throw new Error('Http client no inicializado');
     }
     return this.http?.post<any>(`${this.baseUrl}/login`, {username, password})
-
       //Lo usamos para tener varios operadores dentro de este flujo, por que vamos a tener un map un cacth
       ?.pipe(
         //Estamos haciendo un efecto segundario que es un log
@@ -42,7 +49,9 @@ export class AuthService {
         map(response =>{
           //Estamos modificando algo, esa respuesta le vamos a agregar un nuevo item un token, luego voy a devolver esa respuesta
           if(response && response.token){
-            localStorage.setItem('token', response.token);
+            this.setToken(response.token);
+            /*this.cookieService.set("token", response.token, 8640000 + new Date().getTime());*/
+            /*localStorage.setItem('token', response.token);*/
             return response;
           }else{
             throw new Error('No se recibió un token de acceso válido en la respusta del servidor')
@@ -56,23 +65,23 @@ export class AuthService {
 
     }
 
-    register(username:string,password:string, email:string, phone:string):Observable<any>{
+    register(usuario:Usuario):Observable<any>{
       if(!this.http){
         throw new Error('Http client no inicializado');
       }
-      return this.http?.post<any>(`${this.baseUrl}/register`, {username, password, email, phone})
+      return this.http?.post<any>(`${this.baseUrl}/register`,usuario)
         ?.pipe(
           catchError(this.handleError)
         )
     }
 
     logout(){
-      localStorage.removeItem('token');
+     this.cookieService.delete("token");
       this.router?.navigate(['/login']);
     }
 
     getToken():string | null{
-      return localStorage.getItem('token');
+      return this.cookieService.get('token');
 
     }
 
@@ -86,5 +95,7 @@ export class AuthService {
       console.error('Error en la solicitud : ', error);
       return throwError(() => error);
     }
+
+
 
 }

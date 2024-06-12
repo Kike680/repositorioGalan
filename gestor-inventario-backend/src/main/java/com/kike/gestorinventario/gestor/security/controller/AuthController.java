@@ -23,7 +23,7 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("api/auth")
-@CrossOrigin("http://localhost:4200")
+@CrossOrigin("*")
 public class AuthController {
 
     @Autowired
@@ -52,10 +52,11 @@ public class AuthController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Usuario o contraseña incorrecto");
         }
     }
-    @CrossOrigin(origins = "http://localhost:4200")
-    @PostMapping("/registro")
+
+    @PostMapping("/register")
     public ResponseEntity<?> registrarUsuario(@RequestBody RegistroRequest registroRequest){
         //Primero vamos a buscar a este usuario por nombre, si es diferente de nulo es que ya existe
+        System.out.println(registroRequest);
         if(usuarioService.buscarPorNombre(registroRequest.getUsername()) != null){
             return ResponseEntity.badRequest().body("El nombre de usuario ya esta en uso");
         }
@@ -68,18 +69,7 @@ public class AuthController {
         usuario.setPhone(registroRequest.getPhone());
 
         Set<Rol> roles = new HashSet<>();
-        //Recorremos RolEnum, es recorrer los roles que le estamos pasando por el request a la hora registar, por cada rol que vayamos recorriendo, vamos a ir buscando por nombre si coinciden con los nombres del ENUM
-        //De lo que estamos obteniendo, si es que este rolObj existe en estos Enum entonces vamos a agregarlo
-/*        if(registroRequest.getRoles() !=null){
-            for(RolEnum rolEnum : registroRequest.getRoles()){
-                Rol rolObj = rolRepository.findByNombre(rolEnum.name());
-                if(rolObj != null){
-                    roles.add(rolObj);
 
-                }
-            }
-            usuario.setRoles(roles);
-        }*/
         //Si estos roles no fueran validos (O estuviera vacia)
         //Si es questa lista no esta vacia, tenemos el rol y lo agregamos
         //Si tu en el JSON le pasas solo el nombre y el PAssword pero no un rol le vamos a dar por defecto el de USER
@@ -94,3 +84,16 @@ public class AuthController {
     }
 
 }
+//Este for iria debajo del Set<Rol> roles
+//Recorremos RolEnum, es recorrer los roles que le estamos pasando por el request a la hora registar, por cada rol que vayamos recorriendo, vamos a ir buscando por nombre si coinciden con los nombres del ENUM
+//De lo que estamos obteniendo, si es que este rolObj existe en estos Enum entonces vamos a agregarlo
+/*        if(registroRequest.getRoles() !=null){
+            for(RolEnum rolEnum : registroRequest.getRoles()){
+                Rol rolObj = rolRepository.findByNombre(rolEnum.name());
+                if(rolObj != null){
+                    roles.add(rolObj);
+
+                }
+            }
+            usuario.setRoles(roles);
+        }*/

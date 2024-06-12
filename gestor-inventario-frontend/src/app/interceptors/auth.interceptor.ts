@@ -1,5 +1,6 @@
 import { HttpInterceptorFn } from '@angular/common/http';
 import { AuthService } from '../services/auth.service';
+import {inject} from "@angular/core";
 
 /**
  * Interceptor HTTP para añadir el token de autenticación a las solicitudes salientes.
@@ -11,8 +12,10 @@ import { AuthService } from '../services/auth.service';
  */
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   // Crear una instancia del AuthService para obtener el token.
-  const authService = new AuthService();
+  const authService = inject(AuthService) ;
   const token = authService.getToken();
+
+  console.log(token);
 
   // Si hay un token disponible, clonar la solicitud y añadir la cabecera de autorización.
   if (token) {
@@ -24,4 +27,5 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   }
   // Pasar la solicitud al siguiente manejador en la cadena de interceptores.
   return next(req);
+
 };

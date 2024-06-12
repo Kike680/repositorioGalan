@@ -26,6 +26,8 @@ public class UsuarioService {
     public Usuario guardarUsuario(Usuario usuario) {
         usuario.setUsername(usuario.getUsername());
         usuario.setRoles(usuario.getRoles());
+        //Cambiar esta linea y dejar la de sin password despues de pruebas
+       // usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
         usuario.setPassword(usuario.getPassword());
         usuario.setEmail(usuario.getEmail());
         usuario.setPhone(usuario.getPhone());

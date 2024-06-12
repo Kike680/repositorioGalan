@@ -72,15 +72,6 @@
     </mat-menu>
     <button mat-button [matMenuTriggerFor]="menu">Servicios</button>
   </div>
-  <form class="example-form" (submit)="onSearch()">
-    <mat-form-field appearance="fill">
-      <mat-label>Buscar</mat-label>
-      <input matInput [(ngModel)]="searchQuery" (input)="onSearchChange($event)">
-    </mat-form-field>
-    <button mat-icon-button type="submit">
-      <mat-icon>search</mat-icon>
-    </button>
-  </form>
   <span>
     <mat-icon>facebook</mat-icon>
     <mat-icon>twitter</mat-icon>
