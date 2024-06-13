@@ -4,22 +4,28 @@ import {Router} from "@angular/router";
 import {catchError, map, Observable, tap, throwError} from "rxjs";
 import {Usuario} from "../models/usuario";
 import {CookieService} from "ngx-cookie-service";
+import {JwtHelperService} from "@auth0/angular-jwt";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  setToken(token: string) {
+  private setTokenAndUser(token: string, user: Usuario) {
     const currentDate = new Date();
-    const expiresAt = new Date(currentDate.getTime() + 8640000);
+    const expiresAt = new Date(currentDate.getTime() + 86400000); // 24 horas
     this.cookieService.set('token', token, expiresAt);
+    this.cookieService.set('user', JSON.stringify(user), expiresAt);
+
+    console.log('Token y usuario guardados en cookies');
+    console.log('Token:', this.cookieService.get('token'));
+    console.log('User:', this.cookieService.get('user'));
   }
 
   private baseUrl= 'http://localhost:8080/api/auth';
 
 
-  constructor(private http:HttpClient, private router:Router, private cookieService:CookieService) { }
+  constructor(private http:HttpClient, private router:Router, private cookieService:CookieService, private jwtHelper: JwtHelperService) { }
 
   /**
    * Método para autenticar a un usuario mediante su username y password.
@@ -49,9 +55,17 @@ export class AuthService {
         map(response =>{
           //Estamos modificando algo, esa respuesta le vamos a agregar un nuevo item un token, luego voy a devolver esa respuesta
           if(response && response.token){
-            this.setToken(response.token);
-            /*this.cookieService.set("token", response.token, 8640000 + new Date().getTime());*/
-            /*localStorage.setItem('token', response.token);*/
+            const decodedToken = this.jwtHelper.decodeToken(response.token);
+            const user: Usuario = {
+              id: decodedToken.user.id, // Ajusta esto según la estructura de tu token
+              username: decodedToken.user.username,
+              email: decodedToken.user.email,
+              phone: decodedToken.user.phone,
+              // Agrega aquí otros campos necesarios según tu estructura
+            };
+
+            this.setTokenAndUser(response.token,user);
+            console.log(this.cookieService.get('user'));
             return response;
           }else{
             throw new Error('No se recibió un token de acceso válido en la respusta del servidor')
@@ -77,6 +91,7 @@ export class AuthService {
 
     logout(){
      this.cookieService.delete("token");
+      this.cookieService.delete("username");
       this.router?.navigate(['/login']);
     }
 
@@ -85,10 +100,15 @@ export class AuthService {
 
     }
 
+    //Este metodo tendre que usarlo cuando me requiera traerme el usuario para poder obtener datos suyos
+  getUser(): Usuario | null {
+    const user = this.cookieService.get('user');
+    return user ? JSON.parse(user) : null;
+  }
     isAuthenticated():boolean{
       const token = this.getToken();
       //El !! convierte ese valor a booleano hace lo mismo que un ternario
-      return !!token;
+      return !!token && !this.jwtHelper.isTokenExpired(token);
     }
 
     handleError(error: any) {
@@ -96,6 +116,10 @@ export class AuthService {
       return throwError(() => error);
     }
 
+  public getUserInfo(): any {
+    const token = this.getToken();
+    return token ? this.jwtHelper.decodeToken(token) : null;
+  }
 
 
 }

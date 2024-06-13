@@ -1,5 +1,6 @@
 import { CanActivateFn, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import {inject} from "@angular/core";
 
 /**
  * Guardián de ruta para verificar la autenticación del usuario.
@@ -10,7 +11,7 @@ import { AuthService } from '../services/auth.service';
  * @returns {boolean} Retorna true si el usuario está autenticado, de lo contrario redirige a la página de login y retorna false.
  */
 export const authGuard: CanActivateFn = (route, state) => {
-  const authService = new AuthService();
+  const authService = inject(AuthService);
   const router = new Router();
 
   // Si está autenticado, permite la navegación a la ruta solicitada.

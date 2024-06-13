@@ -23,7 +23,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
       setHeaders: {
         Authorization: `Bearer ${token}`
       }
-    })
+    });
   }
   // Pasar la solicitud al siguiente manejador en la cadena de interceptores.
   return next(req);
