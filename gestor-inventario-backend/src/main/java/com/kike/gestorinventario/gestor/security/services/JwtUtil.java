@@ -3,6 +3,7 @@ package com.kike.gestorinventario.gestor.security.services;
 
 //Se va a encagar de verificar y cargar el Token con su cabezara clave secreta etc.
 
+import com.kike.gestorinventario.gestor.security.dto.UsuarioDTO;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
@@ -39,19 +40,20 @@ public class JwtUtil {
 
     }
 
-    public String generateToken(UserDetails userDetails) {
+    public String generateToken(UsuarioDTO usuarioDTO) {
 
         Map<String, Object> claims = new HashMap<>();
-        return  createToken(claims, userDetails.getUsername());
+        return  createToken(claims, usuarioDTO);
 
     }
 
-    private String createToken(Map<String, Object> claims, String subject) {
+    private String createToken(Map<String, Object> claims,UsuarioDTO usuarioDTO) {
 
         //Aqui estamos creando un tocker
         return Jwts.builder()
                 .claims(claims)
-                .subject(subject)
+                .claim("user", usuarioDTO)
+                .subject(usuarioDTO.getUsername())
                 .issuedAt(new Date(System.currentTimeMillis()))
                 .expiration(new Date(System.currentTimeMillis() + expiration))
                 .signWith(Keys.hmacShaKeyFor(secretKey.getEncoded()))

@@ -7,7 +7,9 @@ import com.kike.gestorinventario.gestor.enums.RolEnum;
 import com.kike.gestorinventario.gestor.security.dto.AuthRequest;
 import com.kike.gestorinventario.gestor.security.dto.AuthResponse;
 import com.kike.gestorinventario.gestor.security.dto.RegistroRequest;
+import com.kike.gestorinventario.gestor.security.dto.UsuarioDTO;
 import com.kike.gestorinventario.gestor.security.repository.RolRepository;
+import com.kike.gestorinventario.gestor.security.repository.UsuarioRepository;
 import com.kike.gestorinventario.gestor.security.services.JwtUtil;
 import com.kike.gestorinventario.gestor.security.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,14 +40,18 @@ public class AuthController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+
     //Para iniciar sesion hay que pasarle un RequestBody una Peticiion de Authentificaion
     @PostMapping("/login")
     public ResponseEntity<?> iniciarSesion(@RequestBody AuthRequest authRequest){
         UserDetails userDetails = userDetailsService.loadUserByUsername(authRequest.getUsername());
-
+        Usuario usuario = usuarioRepository.findByUsername(authRequest.getUsername());
+        UsuarioDTO userDTO = UsuarioDTO.userToDto(usuario);
         //Verificar si el usario existe y su contraseña correcta Si lo que obtiene del JSON es igual ala contraseña de userDEtails authRequest no esta encriptada y la  de userDetails si
         if(userDetails != null && passwordEncoder.matches(authRequest.getPassword(), userDetails.getPassword())){
-            String jwt = jwtUtil.generateToken(userDetails);
+            String jwt = jwtUtil.generateToken(userDTO);
             //El cuerpo de la respuesta es un token, iniciar sesion, generar el token y enviarlo
             return ResponseEntity.ok(new AuthResponse(jwt));
         }else{
