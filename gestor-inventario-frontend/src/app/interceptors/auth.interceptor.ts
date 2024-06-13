@@ -19,6 +19,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
   // Si hay un token disponible, clonar la solicitud y añadir la cabecera de autorización.
   if (token) {
+    
     req = req.clone({
       setHeaders: {
         Authorization: `Bearer ${token}`

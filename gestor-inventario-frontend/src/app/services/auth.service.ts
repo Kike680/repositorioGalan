@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
-import {catchError, map, Observable, tap, throwError} from "rxjs";
+import {BehaviorSubject, catchError, map, Observable, tap, throwError} from "rxjs";
 import {Usuario} from "../models/usuario";
 import {CookieService} from "ngx-cookie-service";
 import {JwtHelperService} from "@auth0/angular-jwt";
@@ -10,6 +10,10 @@ import {JwtHelperService} from "@auth0/angular-jwt";
   providedIn: 'root'
 })
 export class AuthService {
+
+  currentSession: BehaviorSubject<Boolean> = new BehaviorSubject<Boolean>(false);
+  sessionToken: BehaviorSubject<String> = new BehaviorSubject<String>('');
+  sessionUser: BehaviorSubject<Usuario | null>  = new BehaviorSubject<Usuario | null>(null);
 
   private setTokenAndUser(token: string, user: Usuario) {
     const currentDate = new Date();
@@ -57,12 +61,16 @@ export class AuthService {
           if(response && response.token){
             const decodedToken = this.jwtHelper.decodeToken(response.token);
             const user: Usuario = {
-              id: decodedToken.user.id, // Ajusta esto según la estructura de tu token
+              id: decodedToken.user.id,
               username: decodedToken.user.username,
               email: decodedToken.user.email,
               phone: decodedToken.user.phone,
-              // Agrega aquí otros campos necesarios según tu estructura
+
             };
+            //Para iniciar sesion directamente con la ayuda del interceptor
+            this.sessionToken.next(response.token);
+            this.sessionUser.next(user);
+            this.currentSession.next(true);
 
             this.setTokenAndUser(response.token,user);
             console.log(this.cookieService.get('user'));
