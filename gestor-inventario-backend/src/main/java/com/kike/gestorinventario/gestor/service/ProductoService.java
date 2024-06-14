@@ -10,6 +10,7 @@ public interface ProductoService {
     List<Producto> buscarTodosProductos();
     Optional<Producto> buscarProductoPorId(Long id);
     Producto save(Producto producto);
+    void updateCantidad(Long id, Integer cantidad);
     void borrarPorId(Long id);
     List<Producto> buscarProductPorNombre(String nombre);
     List<Producto> buscarProductPorCategoriaId(Long categoriaId);

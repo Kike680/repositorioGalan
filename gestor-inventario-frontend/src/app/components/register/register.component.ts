@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import { RouterLink } from "@angular/router";
 import {Usuario} from "../../models/usuario";
+import {Registro} from "../../models/registro";
 
 @Component({
   selector: 'app-register',
@@ -32,9 +33,12 @@ export class RegisterComponent implements OnInit {
 
   onSubmit(): void {
     if (this.registerForm.valid) {
-      const {username, email, phone, password} = this.registerForm.value;
-      const usuario=  new Usuario(this.registerForm.value);
-      this.authService.register(usuario).subscribe({
+      const user:Registro = this.registerForm.value;
+
+     /* const usuario=  new Usuario(this.registerForm.value);*/
+      console.log(user);
+
+      this.authService.register(user).subscribe({
         next: () => {
           Swal.fire({
             title: "Usuario registrado",

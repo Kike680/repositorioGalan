@@ -31,6 +31,16 @@ public class ProductoServiceImpl implements ProductoService {
     }
 
     @Override
+    public void updateCantidad(Long id, Integer cantidad) {
+        Optional<Producto> productoOpt = productoRepository.findById(id);
+        if (productoOpt.isPresent()) {
+            Producto producto = productoOpt.get();
+            producto.setCantidad(cantidad);
+            productoRepository.save(producto);
+        }
+    }
+
+    @Override
     public void borrarPorId(Long id) {
         productoRepository.deleteById(id);
     }

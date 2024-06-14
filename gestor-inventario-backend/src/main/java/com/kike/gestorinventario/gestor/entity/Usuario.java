@@ -1,12 +1,10 @@
 package com.kike.gestorinventario.gestor.entity;
 
-
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.ToString;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -23,18 +21,17 @@ public class Usuario {
     private String password;
     private String email;
     private String phone;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name= "usuarios_roles",
             joinColumns = @JoinColumn(name = "usuario_id"),
             inverseJoinColumns = @JoinColumn(name = "rol_id")
     )
-    //Los roles vamos a trabajar con Enums
-    @Enumerated(EnumType.STRING)
     private Set<Rol> roles = new HashSet<>();
 
-    @OneToMany(mappedBy = "usuario")
-    private List<Orden> ordenes;
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Producto> productos = new HashSet<>();
 
     @Override
     public boolean equals(Object o) {

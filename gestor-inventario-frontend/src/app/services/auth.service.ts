@@ -87,7 +87,7 @@ export class AuthService {
 
     }
 
-    register(usuario:Usuario):Observable<any>{
+    register(usuario:any):Observable<any>{
       if(!this.http){
         throw new Error('Http client no inicializado');
       }
@@ -99,7 +99,7 @@ export class AuthService {
 
     logout(){
      this.cookieService.delete("token");
-      this.cookieService.delete("username");
+      this.cookieService.delete("user");
       this.router?.navigate(['/login']);
     }
 

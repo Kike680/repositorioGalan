@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UsuarioService {
 
@@ -22,6 +24,12 @@ public class UsuarioService {
     public Usuario buscarPorNombre(String username) {
         return usuarioRepository.findByUsername(username);
     }
+
+ /*   @Transactional
+    public Optional<Usuario> findById(Long id) {
+        return usuarioRepository.findById(id);
+    }*/
+
     @Transactional
     public Usuario guardarUsuario(Usuario usuario) {
         usuario.setUsername(usuario.getUsername());
@@ -39,6 +47,8 @@ public class UsuarioService {
         for (Rol rol : usuario.getRoles()) {
             rol.getUsuarios().add(usuarioGuardado);
         }
+
         return  usuarioGuardado;
     }
+
 }

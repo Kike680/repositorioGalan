@@ -13,5 +13,5 @@ public class RegistroRequest {
     private String password;
     private String email;
     private String phone;
-    private Set<RolEnum> roles;
+   /* private Set<RolEnum> roles;*/
 }

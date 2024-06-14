@@ -6,10 +6,7 @@ export class Usuario {
     phone?:string;
 
 
-  constructor(data:any) {
-    this.id = data.id;
-    this.username = data.username;
-    this.email = data.email;
-    this.phone = data.phone;
+  constructor(data:Partial<Usuario>){
+    Object.assign(this,data);
   }
 }

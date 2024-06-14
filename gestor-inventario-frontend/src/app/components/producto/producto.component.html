@@ -1,0 +1,90 @@
+<!--
+<form [formGroup]="productoForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="nombre">Nombre</label>
+    <input id="nombre" formControlName="nombre">
+  </div>
+
+  <div>
+    <label for="descripcion">Descripción</label>
+    <input id="descripcion" formControlName="descripcion">
+  </div>
+
+  <div>
+    <label for="precio">Precio</label>
+    <input id="precio" formControlName="precio" type="number">
+  </div>
+
+  <div>
+    <label for="cantidad">Cantidad</label>
+    <input id="cantidad" formControlName="cantidad" type="number">
+  </div>
+
+  <div>
+    <label for="categoriaId">Categoría</label>
+    <input id="categoriaId" formControlName="categoriaId">
+    &lt;!&ndash;Aqui deberia hacer un desplegable con los valores de las categorias que hay y uno ser categoria id si no el nombre&ndash;&gt;
+  </div>
+
+  <div>
+    <h1>Convertir Imagen a Base64</h1>
+    <input type="file" (change)="onFileSelected($event)" />
+    @if (base64Image){
+      <div>
+      <div>
+        <img [src]="base64Image" alt="Imagen convertida a Base64" />
+      </div>
+      </div>
+
+
+    }
+  </div>
+  <input type="text" [value]="base64Image" formControlName="imagen" name="imagen">
+
+  <button type="submit">Crear Producto</button>
+
+</form>
+-->
+<form [formGroup]="productoForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="nombre">Nombre</label>
+    <input id="nombre" formControlName="nombre">
+  </div>
+
+  <div>
+    <label for="descripcion">Descripción</label>
+    <input id="descripcion" formControlName="descripcion">
+  </div>
+
+  <div>
+    <label for="precio">Precio</label>
+    <input id="precio" formControlName="precio" type="number">
+  </div>
+
+  <div>
+    <label for="cantidad">Cantidad</label>
+    <input id="cantidad" formControlName="cantidad" type="number">
+  </div>
+
+  <div>
+    <label for="categoria">Categoría</label>
+    <input id="categoria" formControlName="categoria">
+    <!--Aqui deberia hacer un desplegable con los valores de las categorias que hay y uno ser categoria id si no el nombre-->
+  </div>
+
+  <div>
+    <h1>Convertir Imagen a Base64</h1>
+    <input type="file" (change)="onFileSelected($event)" />
+    @if (base64Image) {
+      <div>
+        <div>
+          <img [src]="base64Image" alt="Imagen convertida a Base64" />
+        </div>
+      </div>
+    }
+  </div>
+  <input type="text" [value]="base64Image" formControlName="imagen" name="imagen">
+
+  <button type="submit">Crear Producto</button>
+</form>
+
