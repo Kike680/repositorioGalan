@@ -4,13 +4,17 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.kike.gestorinventario.gestor.SubirFotos.FileUpload;
+import com.kike.gestorinventario.gestor.dto.CategoriaDTO;
 import com.kike.gestorinventario.gestor.dto.ProductoDTO;
 import com.kike.gestorinventario.gestor.entity.Categoria;
 import com.kike.gestorinventario.gestor.entity.Producto;
 import com.kike.gestorinventario.gestor.entity.Usuario;
+import com.kike.gestorinventario.gestor.security.dto.UsuarioDTO;
+import com.kike.gestorinventario.gestor.security.services.JwtUtil;
 import com.kike.gestorinventario.gestor.security.services.UsuarioService;
 import com.kike.gestorinventario.gestor.service.CategoriaService;
 import com.kike.gestorinventario.gestor.service.ProductoService;
+import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -41,28 +45,42 @@ public class ProductoController {
     @Autowired
     private UsuarioService usuarioService;
 
+    @Autowired
+    private JwtUtil jwtUtil;
+
     @GetMapping
     public List<ProductoDTO> findAll() {
         return productoService.buscarTodosProductos().stream().map(this::convertToDto).collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProductoDTO> findById(@PathVariable Long id) {
+    public ResponseEntity<ProductoDTO> findByIdUsuario(@PathVariable Long id) {
         Optional<Producto> producto = productoService.buscarProductoPorId(id);
         return producto.map(value -> ResponseEntity.ok(convertToDto(value)))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public ProductoDTO save(@RequestBody ProductoDTO productoString) throws IOException {
-        System.out.println("Producto: " + productoString);
-        ProductoDTO productoDTO = productoString;
-        Producto producto = convertToEntity(productoDTO);
-        if(this.getAuthentication() instanceof Usuario user){
-           producto.setUsuario(user);
-        }
+    public ResponseEntity<?> save(@RequestBody ProductoDTO productoString) throws IOException {
+       /* System.out.println(token.substring(7));
+        Claims claims = jwtUtil.extractAllClaims(token.substring(7));*/
+      /*  Usuario userSession = (Usuario) claims.get("user");*/
 
-        return convertToDto(productoService.save(producto));
+            System.out.println(productoString);
+            Producto producto = convertToEntity(productoString);
+            System.out.println(producto.toString());
+            Categoria categoriaGuardar = categoriaService.buscarCatePorId(productoString.getCategoria().getId());
+            System.out.println(categoriaGuardar);
+            producto.setCategoria(categoriaGuardar);
+            System.out.println(producto.toString());
+
+            /*if(this.getAuthentication() instanceof Usuario user){*/
+              /*  producto.setUsuario(userSession);*/
+                return ResponseEntity.ok().body(convertToDto(productoService.save(producto)));
+            /*}*/
+
+
+       /* return ResponseEntity.ok().body("No tiene acceso al usuario autentificado");*/
     }
 
     @DeleteMapping("/{id}")
@@ -77,9 +95,42 @@ public class ProductoController {
         productoDTO.setDescripcion(producto.getDescripcion());
         productoDTO.setPrecio(producto.getPrecio());
         productoDTO.setCantidad(producto.getCantidad());
-        productoDTO.setCategoria(producto.getCategoria());
+        productoDTO.setCategoria(convertToDtoCategoria(producto.getCategoria()));
         productoDTO.setImagenUrl(producto.getImagenUrl());
+        productoDTO.setUsuario(convertToDtoUsuario(producto.getUsuario()));
         return productoDTO;
+    }
+    private UsuarioDTO convertToDtoUsuario(Usuario usuario) {
+        UsuarioDTO usuarioDTO = new UsuarioDTO();
+        usuarioDTO.setId(usuario.getId());
+        usuarioDTO.setUsername(usuario.getUsername());
+        usuarioDTO.setEmail(usuario.getEmail());
+        return usuarioDTO;
+    }
+    public Usuario convertToEntityUsuario(UsuarioDTO usuarioDTO) {
+        Usuario usuario = new Usuario();
+        usuario.setId(usuarioDTO.getId());
+        usuario.setUsername(usuarioDTO.getUsername());
+        usuario.setEmail(usuarioDTO.getEmail());
+        return usuario;
+    }
+
+    private Categoria convertToEntityCategoria(CategoriaDTO categoriaDTO) {
+        Categoria categoria = new Categoria();
+        categoria.setId(categoriaDTO.getId());
+        categoria.setNombre(categoriaDTO.getNombre());
+        categoria.setDescripcion(categoriaDTO.getDescripcion());
+        // Asume que tienes un método para encontrar productos por ID
+        /* categoria.setProductos(productoService.findAllById(categoriaDTO.getProductosIds()));*/
+        return categoria;
+    }
+    private CategoriaDTO convertToDtoCategoria(Categoria categoria) {
+        CategoriaDTO categoriaDTO = new CategoriaDTO();
+        categoriaDTO.setId(categoria.getId());
+        categoriaDTO.setNombre(categoria.getNombre());
+        categoriaDTO.setDescripcion(categoria.getDescripcion());
+        
+        return categoriaDTO;
     }
 
     private Producto convertToEntity(ProductoDTO productoDTO) throws IOException {
@@ -91,11 +142,7 @@ public class ProductoController {
         producto.setCantidad(productoDTO.getCantidad());
         //cambios nuevos
         producto.setImagenUrl(productoDTO.getImagenUrl());
-     /*   if (producto.getImagenUrl() != null && !producto.getImagenUrl().isEmpty()) {
-            byte[]  imagenBytes= Base64.getDecoder().decode(producto.getImagenUrl());
-            String imagenLink = saveImage(imagenBytes);
-            producto.setImagenUrl(imagenLink);
-        }*/
+        producto.setUsuario(convertToEntityUsuario(productoDTO.getUsuario()));
         // Asume que tienes un método para encontrar una categoría por ID
        /* producto.setCategoria(categoriaService.buscarCatePorId(productoDTO.getCategoriaId()).orElse(null));*/
 
@@ -113,24 +160,7 @@ public class ProductoController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return authentication.getPrincipal();
     }
-    //NUEVO
-   /* private String saveImage(byte[] imagenBytes) throws IOException {
-        String directoryPath = "path/to/your/image/directory"; // Reemplaza esto con tu ruta de directorio
-        String fileName = UUID.randomUUID().toString() + ".png"; // Genera un nombre único para la imagen
-        String filePath = directoryPath + File.separator + fileName;
 
-        File directory = new File(directoryPath);
-        if (!directory.exists()) {
-            directory.mkdirs(); // Crea el directorio si no existe
-        }
-
-        try (FileOutputStream fos = new FileOutputStream(filePath)) {
-            fos.write(imagenBytes);
-        }
-
-        return filePath; // Devuelve la ruta del archivo guardado
-    }
-*/
     /*private ProductoDTO convertToDTOFromString(String productoString) {
         try {
             return objectMapper.readValue(productoString, ProductoDTO.class);

@@ -7,6 +7,7 @@ import { FileUploadService } from '../../services/file-upload.service';
 import Swal from 'sweetalert2';
 import {Producto} from "../../models/producto";
 import {Categoria} from "../../models/categoria";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-producto',
@@ -27,7 +28,8 @@ export class ProductoComponent {
   constructor(
     private fb: FormBuilder,
     private productoService: ProductoService,
-    private fileUploadService: FileUploadService
+    private fileUploadService: FileUploadService,
+    private authService: AuthService
   ) {
 
     //Para crear un producto no me interesa ponmerle cantidad
@@ -69,6 +71,7 @@ export class ProductoComponent {
       const producto = new Producto({id:0,nombre:this.productoForm.value.nombre, descripcion: this.productoForm.value.descripcion, cantidad:this.productoForm.value.cantidad, precio:this.productoForm.value.precio, imagenUrl:this.base64Image});
 
       producto.categoria={id:this.productoForm.value.categoria};
+      producto.usuario= this.authService.getUserInfoCookie();
       //Inserto el id diciendole que es el id de la categoria el quel e paso por el form, y el ya se trae el resto de informacion de categoria
       const categoria1 = new Categoria({id: this.productoForm.value.categoria})
       this.fileUploadService.upload(producto).subscribe({
@@ -97,5 +100,6 @@ export class ProductoComponent {
       });
     }
   }
+
 
 }

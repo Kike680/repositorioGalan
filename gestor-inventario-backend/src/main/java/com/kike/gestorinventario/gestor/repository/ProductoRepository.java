@@ -23,4 +23,8 @@ public interface ProductoRepository extends JpaRepository<Producto, Long> {
 
     // Encuentra productos cuyo stock sea menor a un valor específico
     List<Producto> findByCantidadLessThanEqual(Integer cantidad);
+    @Query("SELECT p FROM Producto p WHERE p.usuario.id = :idUsuario")
+    List<Producto> findByIdUsuario(long idUsuario);
+
+
 }

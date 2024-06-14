@@ -49,7 +49,7 @@ public class JwtUtil {
 
     private String createToken(Map<String, Object> claims,UsuarioDTO usuarioDTO) {
 
-        //Aqui estamos creando un tocker
+        //Aqui estamos creando un tocker //Acordarme por si da fallos por la injeccion que dice Ousama
         return Jwts.builder()
                 .claims(claims)
                 .claim("user", usuarioDTO)
@@ -61,13 +61,13 @@ public class JwtUtil {
 
     }
 
-//Esto seria para extraer los datos
+        //Esto seria para extraer los datos
     public <T> T extractClaims(String token, Function<Claims, T> claimsResolver) {
         final Claims claims = extractAllClaims(token);
         return claimsResolver.apply(claims);
     }
 
-    private Claims extractAllClaims(String token){
+    public Claims extractAllClaims(String token){
         //Primero tenemos que verificar quienes somos para eso le vamos a pasar nuestro token
         //Estamos obteniendo los Claims que seria el payload Datos a enviar firmados por jwt
         return Jwts.parser()

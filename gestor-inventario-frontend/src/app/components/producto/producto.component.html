@@ -1,50 +1,5 @@
 <!--
-<form [formGroup]="productoForm" (ngSubmit)="onSubmit()">
-  <div>
-    <label for="nombre">Nombre</label>
-    <input id="nombre" formControlName="nombre">
-  </div>
 
-  <div>
-    <label for="descripcion">Descripción</label>
-    <input id="descripcion" formControlName="descripcion">
-  </div>
-
-  <div>
-    <label for="precio">Precio</label>
-    <input id="precio" formControlName="precio" type="number">
-  </div>
-
-  <div>
-    <label for="cantidad">Cantidad</label>
-    <input id="cantidad" formControlName="cantidad" type="number">
-  </div>
-
-  <div>
-    <label for="categoriaId">Categoría</label>
-    <input id="categoriaId" formControlName="categoriaId">
-    &lt;!&ndash;Aqui deberia hacer un desplegable con los valores de las categorias que hay y uno ser categoria id si no el nombre&ndash;&gt;
-  </div>
-
-  <div>
-    <h1>Convertir Imagen a Base64</h1>
-    <input type="file" (change)="onFileSelected($event)" />
-    @if (base64Image){
-      <div>
-      <div>
-        <img [src]="base64Image" alt="Imagen convertida a Base64" />
-      </div>
-      </div>
-
-
-    }
-  </div>
-  <input type="text" [value]="base64Image" formControlName="imagen" name="imagen">
-
-  <button type="submit">Crear Producto</button>
-
-</form>
--->
 <form [formGroup]="productoForm" (ngSubmit)="onSubmit()">
   <div>
     <label for="nombre">Nombre</label>
@@ -69,7 +24,7 @@
   <div>
     <label for="categoria">Categoría</label>
     <input id="categoria" formControlName="categoria">
-    <!--Aqui deberia hacer un desplegable con los valores de las categorias que hay y uno ser categoria id si no el nombre-->
+    &lt;!&ndash;Aqui deberia hacer un desplegable con los valores de las categorias que hay y uno ser categoria id si no el nombre&ndash;&gt;
   </div>
 
   <div>
@@ -86,5 +41,50 @@
   <input type="text" [value]="base64Image" formControlName="imagen" name="imagen">
 
   <button type="submit">Crear Producto</button>
+</form>
+
+-->
+<form [formGroup]="productoForm" (ngSubmit)="onSubmit()" class="container mt-5">
+  <div class="mb-3">
+    <label for="nombre" class="form-label">Nombre</label>
+    <input id="nombre" formControlName="nombre" class="form-control">
+  </div>
+
+  <div class="mb-3">
+    <label for="descripcion" class="form-label">Descripción</label>
+    <input id="descripcion" formControlName="descripcion" class="form-control">
+  </div>
+
+  <div class="mb-3">
+    <label for="precio" class="form-label">Precio</label>
+    <input id="precio" formControlName="precio" type="number" class="form-control">
+  </div>
+
+  <div class="mb-3">
+    <label for="cantidad" class="form-label">Cantidad</label>
+    <input id="cantidad" formControlName="cantidad" type="number" class="form-control">
+  </div>
+
+  <div class="mb-3">
+    <label for="categoria" class="form-label">Categoría</label>
+    <input id="categoria" formControlName="categoria" class="form-control">
+    <!-- Aqui deberia hacer un desplegable con los valores de las categorias que hay y uno ser categoria id si no el nombre -->
+  </div>
+
+  <div class="mb-3">
+    <h1>Convertir Imagen a Base64</h1>
+    <input type="file" (change)="onFileSelected($event)" class="form-control" />
+    @if (base64Image) {
+      <div class="mt-3">
+        <div class="text-center">
+          <img [src]="base64Image" alt="Imagen convertida a Base64" class="img-fluid img-thumbnail" />
+        </div>
+      </div>
+    }
+  </div>
+
+  <input type="text" [value]="base64Image" formControlName="imagen" name="imagen" hidden>
+
+  <button type="submit" class="btn btn-primary">Crear Producto</button>
 </form>
 

@@ -124,6 +124,23 @@ export class AuthService {
       return throwError(() => error);
     }
 
+  public  getUserInfoCookie():any{
+      const token = this.getToken();
+    if (token != null) {
+      const decodedToken = this.jwtHelper.decodeToken(token);
+      const user: Usuario = {
+        id: decodedToken.user.id,
+        username: decodedToken.user.username,
+        email: decodedToken.user.email,
+        phone: decodedToken.user.phone,
+
+      };
+      return user;
+    }
+    return null;
+
+  }
+
   public getUserInfo(): any {
     const token = this.getToken();
     return token ? this.jwtHelper.decodeToken(token) : null;

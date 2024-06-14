@@ -9,6 +9,7 @@ import java.util.Optional;
 public interface ProductoService {
     List<Producto> buscarTodosProductos();
     Optional<Producto> buscarProductoPorId(Long id);
+    List<Producto> buscarProductoPorIdUsuario(Long id);
     Producto save(Producto producto);
     void updateCantidad(Long id, Integer cantidad);
     void borrarPorId(Long id);

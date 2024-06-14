@@ -26,6 +26,11 @@ public class ProductoServiceImpl implements ProductoService {
     }
 
     @Override
+    public List<Producto> buscarProductoPorIdUsuario(Long id) {
+        return productoRepository.findByIdUsuario(id);
+    }
+
+    @Override
     public Producto save(Producto producto) {
         return productoRepository.save(producto);
     }

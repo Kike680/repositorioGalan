@@ -29,9 +29,8 @@ public class CategoriaController {
 
     @GetMapping("/{id}")
     public ResponseEntity<CategoriaDTO> findById(@PathVariable Long id) {
-        Optional<Categoria> categoria = categoriaService.buscarCatePorId(id);
-        return categoria.map(value -> ResponseEntity.ok(convertToDto(value)))
-                .orElseGet(() -> ResponseEntity.notFound().build());
+        Categoria categoria = categoriaService.buscarCatePorId(id);
+        return ResponseEntity.ok().body(convertToDto(categoria));
     }
 
     @PostMapping
@@ -63,7 +62,7 @@ public class CategoriaController {
         productoDTO.setPrecio(producto.getPrecio());
         productoDTO.setCantidad(producto.getCantidad());
         productoDTO.setImagenUrl(producto.getImagenUrl());
-        productoDTO.setCategoria(producto.getCategoria());
+        productoDTO.setCategoria(convertToDto(producto.getCategoria()));
         return productoDTO;
     }
 
@@ -76,4 +75,6 @@ public class CategoriaController {
        /* categoria.setProductos(productoService.findAllById(categoriaDTO.getProductosIds()));*/
         return categoria;
     }
+
+
 }

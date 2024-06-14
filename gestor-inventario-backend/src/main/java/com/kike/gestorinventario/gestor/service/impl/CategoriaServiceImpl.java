@@ -21,8 +21,8 @@ public class CategoriaServiceImpl implements CategoriaService {
     }
 
     @Override
-    public Optional<Categoria> buscarCatePorId(Long id) {
-        return categoriaRepository.findById(id);
+    public Categoria buscarCatePorId(Long id) {
+        return (Categoria) categoriaRepository.getById(id);
     }
 
     @Override
