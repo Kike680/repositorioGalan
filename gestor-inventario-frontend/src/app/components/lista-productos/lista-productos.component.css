@@ -1,0 +1,11 @@
+.container {
+  max-width: 800px;
+}
+
+.img-thumbnail {
+  margin-top: 10px;
+}
+
+.btn-danger {
+  margin-top: 10px;
+}

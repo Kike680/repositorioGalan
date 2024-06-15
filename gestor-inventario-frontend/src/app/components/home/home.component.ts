@@ -18,8 +18,8 @@ export class HomeComponent {
   subtitle = 'La solución integral para la gestión de tu inventario';
   features = [
     { icon: 'inventory', title: 'Gestión de Productos', description: 'Administra todos tus productos de manera eficiente y organizada.' },
-    { icon: 'analytics', title: 'Reportes Avanzados', description: 'Obtén reportes detallados sobre tus inventarios y ventas.' },
-    { icon: 'security', title: 'Seguridad', description: 'Protege tus datos con nuestras avanzadas medidas de seguridad.' }
+    { icon: 'analytics', title: 'Creacion de Categorias', description: 'Crea tus propias Categorias para organizar tus productos' },
+    { icon: 'security', title: 'Seguridad', description: 'Protege tus datos con nuestras avanzadas medidas de seguridad implementamos JWT!.' }
   ];
 
   constructor() { }

@@ -35,7 +35,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/productos")
-@CrossOrigin(origins = "*")
+@CrossOrigin("*")
 public class ProductoController {
     @Autowired
     private ProductoService productoService;
