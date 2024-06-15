@@ -12,15 +12,15 @@ export class ProductoService {
 
   constructor(private http: HttpClient) { }
 
-  getProductos(): Observable<Producto[]> {
-    return this.http.get<Producto[]>(`${this.baseUrl}`);
+  getProductosByUser(userId: number): Observable<Producto[]> {
+    return this.http.get<Producto[]>(`${this.baseUrl}/user/${userId}`);
   }
 
-  getProducto(id: number): Observable<Producto> {
-    return this.http.get<Producto>(`${this.baseUrl}/${id}`);
+  getProducto(userId: number, id: number): Observable<Producto> {
+    return this.http.get<Producto>(`${this.baseUrl}/user/${userId}/producto/${id}`);
   }
 
-  deleteProducto(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+  deleteProducto(userId: number, id: number): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/user/${userId}/producto/${id}`);
   }
 }

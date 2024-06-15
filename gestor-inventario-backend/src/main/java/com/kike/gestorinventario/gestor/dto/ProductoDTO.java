@@ -1,7 +1,5 @@
 package com.kike.gestorinventario.gestor.dto;
 
-import com.kike.gestorinventario.gestor.entity.Categoria;
-
 import com.kike.gestorinventario.gestor.security.dto.UsuarioDTO;
 import lombok.*;
 

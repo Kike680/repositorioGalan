@@ -141,10 +141,16 @@ export class AuthService {
 
   }
 
-  public getUserInfo(): any {
+  public getUserIdFromCookie(): any {
     const token = this.getToken();
-    return token ? this.jwtHelper.decodeToken(token) : null;
+    if (token != null) {
+      const decodedToken = this.jwtHelper.decodeToken(token);
+      const userId = decodedToken.user.id;
+      return userId;
+    }
+    return null;
   }
+
 
 
 }

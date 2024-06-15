@@ -53,11 +53,15 @@ public class ProductoController {
         return productoService.buscarTodosProductos().stream().map(this::convertToDto).collect(Collectors.toList());
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<ProductoDTO> findByIdUsuario(@PathVariable Long id) {
-        Optional<Producto> producto = productoService.buscarProductoPorId(id);
-        return producto.map(value -> ResponseEntity.ok(convertToDto(value)))
-                .orElseGet(() -> ResponseEntity.notFound().build());
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<ProductoDTO>> findByIdUsuario(@PathVariable Long userId) {
+        List<Producto> productos = productoService.buscarProductoPorIdUsuario(userId);
+
+            List<ProductoDTO> productoDTOs = productos.stream()
+                    .map(this::convertToDto)
+                    .collect(Collectors.toList());
+            return ResponseEntity.ok(productoDTOs);
+
     }
 
     @PostMapping
@@ -129,7 +133,8 @@ public class ProductoController {
         categoriaDTO.setId(categoria.getId());
         categoriaDTO.setNombre(categoria.getNombre());
         categoriaDTO.setDescripcion(categoria.getDescripcion());
-        
+        //No es un array, borrarlo
+        /*categoriaDTO.setProductos(categoria.getProductos().stream().map(this::convertToDto).collect(Collectors.toList()));*/
         return categoriaDTO;
     }
 

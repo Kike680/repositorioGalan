@@ -1,1 +1,16 @@
-<p>lista-productos works!</p>
+<div>
+  <h2>Mis Productos</h2>
+  <ul>
+    @for (producto of productos; track productos) {
+      <li>
+        <strong>Nombre:</strong> {{ producto.nombre }}<br>
+        <strong>Descripción:</strong> {{ producto.descripcion }}<br>
+        <strong>Precio:</strong> {{ producto.precio }}<br>
+        <strong>Cantidad:</strong> {{ producto.cantidad }}<br>
+        <strong>Categoría:</strong> {{ producto.categoria?.nombre }}<br>
+        <strong>Imagen:</strong> <img [src]="producto.imagenUrl" alt="{{ producto.nombre }}" width="100"><br>
+        <button (click)="deleteProducto(producto.id!)">Eliminar</button>
+      </li>
+    }
+  </ul>
+</div>
