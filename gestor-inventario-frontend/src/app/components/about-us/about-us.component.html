@@ -1,129 +1,112 @@
-<!--
 <div class="about-container">
-  <mat-card class="about-card">
-    <mat-card-header>
-      <mat-card-title>Sobre Nosotros</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <p>
-        Bienvenido a MyApp. Somos una empresa dedicada a proporcionar soluciones innovadoras para la gestión de inventarios. Nuestro objetivo es facilitar la vida de nuestros usuarios a través de herramientas eficientes y fáciles de usar.
-      </p>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-button color="primary" (click)="showAlert()">Saber Más</button>
-    </mat-card-actions>
-  </mat-card>
-
-  <mat-grid-list cols="1" rowHeight="2:1">
-    <mat-grid-tile>
+  <mat-accordion class="about-accordion">
+    <mat-expansion-panel expanded>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Sobre Mí
+        </mat-panel-title>
+      </mat-expansion-panel-header>
       <mat-card class="about-card">
-        <mat-card-header>
-          <mat-card-title>Nuestra Historia</mat-card-title>
-        </mat-card-header>
         <mat-card-content>
           <p>
-            MyApp fue fundada en 2020 con la visión de simplificar la gestión de inventarios. Desde entonces, hemos ayudado a cientos de empresas a mejorar sus procesos y aumentar su eficiencia.
+            ¡Hola! Soy Enrique Galan, estudiante de desarrollo web apasionado por las nuevas tecnologías y el aprendizaje de estas. Me encanta aprender y aplicar nuevas tecnologías para resolver problemas del mundo real.
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button color="primary" (click)="showAlert()">Contactar</button>
+        </mat-card-actions>
+      </mat-card>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Tecnologías que Utilizo
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-card class="about-card">
+        <mat-card-content>
+          <p>
+            En esta aplicación estoy intentando implementar los conocimientos que he adquirido a lo largo de estos dos años.
+            <br>
+            <br>
+            Tecnologías implementadas:
+          </p>
+          <ul>
+            <li>Angular: Gestión del frontend y consumo de mi API para la gestión de los datos</li>
+            <li>Java con framework Spring Boot: Gestión de la API de Angular para tramitar todos los datos obtenidos del front, gestión de la lógica de backend de mi aplicación</li>
+            <li>JWT Security: Para la gestión de mi seguridad con token de autentificación</li>
+            <li>MySQL: Como gestor de base de datos</li>
+          </ul>
+        </mat-card-content>
+      </mat-card>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Mis Aficiones
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-card class="about-card">
+        <mat-card-content>
+          <p>
+            En mi tiempo libre, me gusta explorar nuevas tecnologías, disfrutar de la naturaleza.
           </p>
         </mat-card-content>
       </mat-card>
-    </mat-grid-tile>
+    </mat-expansion-panel>
 
-    <mat-grid-tile>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Datos de Contacto
+        </mat-panel-title>
+      </mat-expansion-panel-header>
       <mat-card class="about-card">
-        <mat-card-header>
-          <mat-card-title>Nuestro Equipo</mat-card-title>
-        </mat-card-header>
         <mat-card-content>
           <p>
-            Contamos con un equipo de profesionales apasionados y dedicados, comprometidos con la excelencia y la innovación.
+            Puedes contactarme a través de los siguientes medios:
           </p>
+          <ul>
+            <li>Email: kryke10&#64;gmail.com</li>
+            <li>Teléfono: 610108865</li>
+            <li>GitHub: <a href="https://github.com/kike680" target="_blank">https://github.com/kike680</a></li>
+          </ul>
         </mat-card-content>
       </mat-card>
-    </mat-grid-tile>
+    </mat-expansion-panel>
+  </mat-accordion>
 
-    <mat-grid-tile>
-      <mat-card class="about-card">
-        <mat-card-header>
-          <mat-card-title>Nuestros Valores</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <p>
-            En MyApp, valoramos la integridad, la innovación y el compromiso con nuestros clientes.
-          </p>
-        </mat-card-content>
-      </mat-card>
-    </mat-grid-tile>
-  </mat-grid-list>
-</div>
--->
-<div class="about-container">
-  <mat-card class="about-card">
-    <mat-card-header>
-      <mat-card-title>Sobre Nosotros</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <p>
-        Bienvenido a MyApp. Somos una empresa dedicada a proporcionar soluciones innovadoras para la gestión de inventarios. Nuestro objetivo es facilitar la vida de nuestros usuarios a través de herramientas eficientes y fáciles de usar.
-      </p>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-button color="primary" (click)="showAlert()">Saber Más</button>
-    </mat-card-actions>
-  </mat-card>
-
-  <mat-grid-list cols="1" rowHeight="2:1">
-    <mat-grid-tile>
-      <mat-card class="about-card">
-        <mat-card-header>
-          <mat-card-title>Nuestra Historia</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <p>
-            MyApp fue fundada en 2020 con la visión de simplificar la gestión de inventarios. Desde entonces, hemos ayudado a cientos de empresas a mejorar sus procesos y aumentar su eficiencia.
-          </p>
-        </mat-card-content>
-      </mat-card>
-    </mat-grid-tile>
-
-    <mat-grid-tile>
-      <mat-card class="about-card">
-        <mat-card-header>
-          <mat-card-title>Nuestro Equipo</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <p>
-            Contamos con un equipo de profesionales apasionados y dedicados, comprometidos con la excelencia y la innovación.
-          </p>
-        </mat-card-content>
-      </mat-card>
-    </mat-grid-tile>
-
-    <mat-grid-tile>
-      <mat-card class="about-card">
-        <mat-card-header>
-          <mat-card-title>Nuestros Valores</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <p>
-            En MyApp, valoramos la integridad, la innovación y el compromiso con nuestros clientes.
-          </p>
-        </mat-card-content>
-      </mat-card>
-    </mat-grid-tile>
-  </mat-grid-list>
-
-  <!-- Añadir el carrusel aquí -->
-  <div class="carousel-container">
-    <owl-carousel-o [options]="customOptions">
-      <ng-template carouselSlide>
-        <img src="assets/image1.jpg" alt="Imagen 1">
-      </ng-template>
-      <ng-template carouselSlide>
-        <img src="assets/image2.jpg" alt="Imagen 2">
-      </ng-template>
-      <ng-template carouselSlide>
-        <img src="assets/image3.jpg" alt="Imagen 3">
-      </ng-template>
-    </owl-carousel-o>
+  <!-- Carrusel de imágenes -->
+  <div id="carouselExampleIndicators" class="carousel slide about-carousel" data-bs-ride="carousel" data-bs-interval="2000" data-bs-wrap="true">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="assets/image1.png" class="d-block w-100" alt="Angular">
+      </div>
+      <div class="carousel-item">
+        <img src="assets/image2.png" class="d-block w-100" alt="JWT">
+      </div>
+      <div class="carousel-item">
+        <img src="assets/image3.png" class="d-block w-100" alt="Java">
+      </div>
+      <div class="carousel-item">
+        <img src="assets/image4.png" class="d-block w-100" alt="MySQL">
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
   </div>
 </div>

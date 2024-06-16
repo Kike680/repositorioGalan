@@ -7,11 +7,13 @@
           <div>
             <strong>Nombre:</strong> {{ producto.nombre }}<br>
             <strong>Descripción:</strong> {{ producto.descripcion }}<br>
-            <strong>Precio:</strong> {{ producto.precio }}<br>
+            <strong>Precio:</strong> {{ producto.precio }} €<br>
             <strong>Cantidad:</strong> {{ producto.cantidad }}<br>
+            <strong>Total:</strong> {{ (producto.precio ?? 0 ) * (producto.cantidad ?? 0)}} €<br>
             <strong>Categoría:</strong> {{ producto.categoria?.nombre }}<br>
             <strong>Imagen:</strong>
             <img [src]="producto.imagenUrl" alt="{{ producto.nombre }}" class="img-thumbnail" width="100"><br>
+
           </div>
           <div>
             <button class="btn btn-primary me-2" (click)="editProducto(producto.id!)">Modificar</button>

@@ -1,9 +1,4 @@
 package com.kike.gestorinventario.gestor.controller;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
-import com.kike.gestorinventario.gestor.SubirFotos.FileUpload;
 import com.kike.gestorinventario.gestor.dto.CategoriaDTO;
 import com.kike.gestorinventario.gestor.dto.ProductoDTO;
 import com.kike.gestorinventario.gestor.entity.Categoria;
@@ -17,22 +12,14 @@ import com.kike.gestorinventario.gestor.service.ProductoService;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RestController
@@ -79,10 +66,6 @@ public class ProductoController {
 
     @PostMapping
     public ResponseEntity<?> save(@RequestBody ProductoDTO productoString) throws IOException {
-       /* System.out.println(token.substring(7));
-        Claims claims = jwtUtil.extractAllClaims(token.substring(7));*/
-      /*  Usuario userSession = (Usuario) claims.get("user");*/
-
             System.out.println(productoString);
             Producto producto = convertToEntity(productoString);
             System.out.println(producto.toString());
@@ -91,13 +74,12 @@ public class ProductoController {
             producto.setCategoria(categoriaGuardar);
             System.out.println(producto.toString());
 
-            /*if(this.getAuthentication() instanceof Usuario user){*/
-              /*  producto.setUsuario(userSession);*/
+
                 return ResponseEntity.ok().body(convertToDto(productoService.save(producto)));
-            /*}*/
 
 
-       /* return ResponseEntity.ok().body("No tiene acceso al usuario autentificado");*/
+
+
     }
 
     @DeleteMapping("/{id}")

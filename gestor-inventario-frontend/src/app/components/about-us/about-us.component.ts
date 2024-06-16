@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import Swal from "sweetalert2";
-import {MatCard, MatCardActions, MatCardContent, MatCardHeader, MatCardModule} from "@angular/material/card";
-import {MatGridList, MatGridListModule, MatGridTile} from "@angular/material/grid-list";
+import {MatCardActions, MatCardContent, MatCardHeader, MatCardModule} from "@angular/material/card";
+import {MatGridListModule, MatGridTile} from "@angular/material/grid-list";
+import {CarouselModule} from "ngx-owl-carousel-o";
+import {MatAccordion, MatExpansionModule, MatExpansionPanel, MatExpansionPanelTitle} from "@angular/material/expansion";
+import {MatButtonModule} from "@angular/material/button";
 
 @Component({
   selector: 'app-about-us',
@@ -12,28 +15,25 @@ import {MatGridList, MatGridListModule, MatGridTile} from "@angular/material/gri
     MatGridTile,
     MatCardContent,
     MatGridListModule,
-    MatCardActions
+    MatCardActions,
+    CarouselModule,
+    MatExpansionPanel,
+    MatExpansionPanelTitle,
+    MatAccordion,
+    MatExpansionModule, MatButtonModule,
   ],
   templateUrl: './about-us.component.html',
   styleUrl: './about-us.component.css'
 })
 export class AboutUsComponent {
-  customOptions: any = {
-    loop: true,
-    autoplay: true,
-    autoplayTimeout: 3000,
-    autoplayHoverPause: true,
-    items: 1,
-    dots: true,
-    nav: true,
-    navText: ['Anterior', 'Siguiente']
-  };
   showAlert() {
     Swal.fire({
-      title: '¡Bienvenido a MyApp!',
-      text: 'Gracias por visitar nuestra aplicación.',
-      icon: 'info',
-      confirmButtonText: 'Cerrar'
+      title: "Disponibilidad",
+      text: "Lunes-Viernes 9AM-8PM",
+      imageUrl: "https://unsplash.it/400/200",
+      imageWidth: 400,
+      imageHeight: 200,
+      imageAlt: "Custom image"
     });
   }
 

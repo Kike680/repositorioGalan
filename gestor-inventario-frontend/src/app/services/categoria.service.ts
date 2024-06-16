@@ -13,4 +13,5 @@ export class CategoriaService {
   getCategorias(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl);
   }
+
 }
