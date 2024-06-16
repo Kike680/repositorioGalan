@@ -1,11 +1,23 @@
-/*
-!* Estilo adicional para el formulario *!
+/* styles.css */
+
 .container {
   max-width: 600px;
-  padding: 20px;
   background-color: #f8f9fa;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .form-label {
@@ -14,47 +26,49 @@
 }
 
 .form-control {
-  margin-bottom: 15px;
-  border-radius: 5px;
+  border-radius: 0.25rem;
   border: 1px solid #ced4da;
+  transition: border-color 0.3s, box-shadow 0.3s;
 }
 
 .form-control:focus {
-  border-color: #80bdff;
-  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
 .btn-primary {
   background-color: #007bff;
   border-color: #007bff;
-  border-radius: 5px;
-  padding: 10px 20px;
+  transition: background-color 0.3s, transform 0.3s;
 }
 
 .btn-primary:hover {
   background-color: #0056b3;
   border-color: #004085;
+  transform: scale(1.05);
+}
+
+.btn-success {
+  background-color: #28a745;
+  border-color: #28a745;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.btn-success:hover {
+  background-color: #218838;
+  border-color: #1e7e34;
+  transform: scale(1.05);
+}
+
+h2, h4 {
+  color: #343a40;
+  animation: fadeIn 1s ease-in-out;
 }
 
 .img-thumbnail {
   max-width: 100%;
   height: auto;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-*/
-.container {
-  max-width: 600px;
-}
-
-.img-thumbnail {
-  margin-top: 10px;
-}
-
-.mat-raised-button {
-  margin-top: 10px;
-}
-
-.d-flex {
-  gap: 10px;
+  border-radius: 0.25rem;
+  border: 1px solid #dee2e6;
+  animation: fadeIn 1s ease-in-out;
 }

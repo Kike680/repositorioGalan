@@ -23,11 +23,6 @@ public class CategoriaController {
     @Autowired
     private ProductoService productoService;
 
-    /*@GetMapping
-    public ResponseEntity<List<CategoriaDTO>> findAll() {
-        return (ResponseEntity<List<CategoriaDTO>>) categoriaService.buscarTodasCategorias().stream().map(this::convertToDto).collect(Collectors.toList());
-    }*/
-
     @GetMapping
     public ResponseEntity<List<CategoriaDTO>> findAll() {
         List<Categoria> categorias = categoriaService.buscarTodasCategorias();
@@ -60,7 +55,7 @@ public class CategoriaController {
         categoriaDTO.setId(categoria.getId());
         categoriaDTO.setNombre(categoria.getNombre());
         categoriaDTO.setDescripcion(categoria.getDescripcion());
-       /* categoriaDTO.setProductos(categoria.getProductos().stream().map(this::convertProductoToDto).collect(Collectors.toList()));*/
+        categoriaDTO.setProductos(categoria.getProductos().stream().map(this::convertProductoToDto).collect(Collectors.toList()));
         return categoriaDTO;
     }
 

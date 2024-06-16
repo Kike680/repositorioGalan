@@ -7,6 +7,8 @@ export class Categoria {
   nombre?:string;
   descripcion?:string;
   productos?:Producto[];
+
+
   constructor(data:Partial<Categoria>){
     Object.assign(this,data);
   }

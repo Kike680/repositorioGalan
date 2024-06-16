@@ -1,5 +1,6 @@
 package com.kike.gestorinventario.gestor.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -27,6 +28,7 @@ public class Producto {
     @Column(columnDefinition="longtext")
     private String imagenUrl;
 
+    @JsonIgnoreProperties("productos")
     @ManyToOne
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;

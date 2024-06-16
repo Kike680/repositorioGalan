@@ -1,5 +1,7 @@
 package com.kike.gestorinventario.gestor.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,6 +21,8 @@ public class Categoria {
     private String nombre;
     private String descripcion;
 
+    //Me va a aservir para evitar referencias circulares para los bucles infinitos
+    @JsonIgnoreProperties("categoria")
     @OneToMany(mappedBy = "categoria")
     private List<Producto> productos;
 

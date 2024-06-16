@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {Router, RouterLink} from '@angular/router';
 import { ProductoService } from '../../services/producto.service';
 import { FileUploadService } from '../../services/file-upload.service';
@@ -8,9 +8,12 @@ import Swal from 'sweetalert2';
 import {Producto} from "../../models/producto";
 import {Categoria} from "../../models/categoria";
 import {AuthService} from "../../services/auth.service";
-import {MatFormField} from "@angular/material/form-field";
-import {MatOption, MatSelect} from "@angular/material/select";
 import {CategoriaService} from "../../services/categoria.service";
+import {of} from "rxjs";
+import {MatCard, MatCardContent, MatCardTitle} from "@angular/material/card";
+import {MatFormField, MatLabel} from "@angular/material/form-field";
+import {MatOption} from "@angular/material/autocomplete";
+import {MatSelect} from "@angular/material/select";
 
 @Component({
   selector: 'app-producto',
@@ -21,9 +24,14 @@ import {CategoriaService} from "../../services/categoria.service";
     ReactiveFormsModule,
     HttpClientModule,
     RouterLink,
+    MatCard,
+    MatCardTitle,
+    MatCardContent,
+    MatLabel,
     MatFormField,
+    MatOption,
     MatSelect,
-    MatOption
+
   ]
 })
 export class ProductoComponent {
@@ -31,19 +39,14 @@ export class ProductoComponent {
   selectedFile: File | null = null;
   base64Image!: string;
   categorias: any[] = [];
-
-  ngOnInit(): void {
-    this.categoriaService.getCategorias().subscribe(data => {
-      this.categorias = data;
-    });
-  }
   constructor(
     private fb: FormBuilder,
     private productoService: ProductoService,
     private fileUploadService: FileUploadService,
     private authService: AuthService,
     private router: Router,
-    private categoriaService: CategoriaService
+    private categoriaService: CategoriaService,
+    private http: HttpClient
   ) {
 
     //Para crear un producto no me interesa ponmerle cantidad
@@ -56,6 +59,16 @@ export class ProductoComponent {
       imagen:['', Validators.required],
     });
   }
+
+  ngOnInit(): void {
+    this.categoriaService.getCategorias().subscribe(
+      data => this.categorias = data,
+      error => console.error('Error al obtener categorías', error)
+    );
+  }
+
+
+
 
 
 
@@ -119,4 +132,5 @@ export class ProductoComponent {
   }
 
 
+  protected readonly of = of;
 }
