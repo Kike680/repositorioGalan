@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {Router, RouterLink} from '@angular/router';
@@ -34,11 +34,12 @@ import {MatSelect} from "@angular/material/select";
 
   ]
 })
-export class ProductoComponent {
+export class ProductoComponent implements OnInit{
   productoForm: FormGroup;
   selectedFile: File | null = null;
   base64Image!: string;
   categorias: any[] = [];
+
   constructor(
     private fb: FormBuilder,
     private productoService: ProductoService,

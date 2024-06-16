@@ -6,6 +6,7 @@ import {authGuard} from "./guards/auth.guard";
 import {unAuthGuard} from "./guards/un-auth.guard";
 import {ProductoComponent} from "./components/producto/producto.component";
 import {ListaProductosComponent} from "./components/lista-productos/lista-productos.component";
+import {EditarProductoComponent} from "./components/editar-producto/editar-producto.component";
 
 export const routes: Routes = [
   {path:'', redirectTo:'/login', pathMatch:'full'},
@@ -13,7 +14,8 @@ export const routes: Routes = [
   {path:'register',component:RegisterComponent},
   {path:'home', component:HomeComponent, canActivate: [authGuard]},
   {path:'producto', component:ProductoComponent, canActivate: [authGuard]},
-  {path:'listaproductos', component:ListaProductosComponent, canActivate: [authGuard]}
+  {path:'listaproductos', component:ListaProductosComponent, canActivate: [authGuard]},
+  {path:'editarproducto/:id', component:EditarProductoComponent, canActivate: [authGuard]}
 
 
 ];

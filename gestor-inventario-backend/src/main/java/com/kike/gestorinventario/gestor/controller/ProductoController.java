@@ -50,6 +50,17 @@ public class ProductoController {
     @Autowired
     private JwtUtil jwtUtil;
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Producto> getProductoById(@PathVariable Long id) {
+        Optional<Producto> producto = productoService.buscarProductoPorId(id);
+
+        if (producto.isPresent()) {
+            return ResponseEntity.ok(producto.get());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     @GetMapping
     public List<ProductoDTO> findAll() {
         return productoService.buscarTodosProductos().stream().map(this::convertToDto).collect(Collectors.toList());

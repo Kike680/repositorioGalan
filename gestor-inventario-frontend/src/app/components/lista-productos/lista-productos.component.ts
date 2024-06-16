@@ -58,7 +58,7 @@ export class ListaProductosComponent implements OnInit {
     });
   }
   editProducto(productId: number): void {
-    this.router.navigate(['/editar-producto', productId]);
+    this.router.navigate(['/editarproducto', productId]);
   }
 
   navigateToCreateProducto(): void {

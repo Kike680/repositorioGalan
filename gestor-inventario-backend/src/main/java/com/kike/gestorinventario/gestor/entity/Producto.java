@@ -33,6 +33,7 @@ public class Producto {
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;
 
+    @JsonIgnoreProperties({"productos", "roles"})
     @ManyToOne
     @JoinColumn(name = "usuario_id")
     private Usuario usuario; // Referencia al usuario propietario
