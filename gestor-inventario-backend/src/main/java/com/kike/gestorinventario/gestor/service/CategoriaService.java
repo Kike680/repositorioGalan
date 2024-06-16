@@ -7,9 +7,10 @@ import java.util.Optional;
 
 public interface CategoriaService {
     List<Categoria> buscarTodasCategorias();
-
     Categoria buscarCatePorId(Long id);
     Categoria save(Categoria categoria);
     void borrarCatPorId(Long id);
     Categoria buscarCatPorNombre(String nombre);
+
+
 }

@@ -15,9 +15,11 @@ import com.kike.gestorinventario.gestor.security.services.UsuarioService;
 import com.kike.gestorinventario.gestor.service.CategoriaService;
 import com.kike.gestorinventario.gestor.service.ProductoService;
 import io.jsonwebtoken.Claims;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -91,6 +93,38 @@ public class ProductoController {
     public void deleteById(@PathVariable Long id) {
         productoService.borrarPorId(id);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateProducto(@PathVariable Long id, @RequestBody ProductoDTO productoDTO, HttpServletRequest request) throws IOException {
+        String token = request.getHeader("Authorization").substring(7);
+        Claims claims = jwtUtil.extractAllClaims(token);
+        Long userId = Long.parseLong(claims.getSubject());
+
+        Optional<Producto> optionalProducto = productoService.buscarProductoPorId(id);
+        if (optionalProducto.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        Producto producto = optionalProducto.get();
+
+        if (!producto.getUsuario().getId().equals(userId)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("No tiene permiso para modificar este producto");
+        }
+
+        producto.setNombre(productoDTO.getNombre());
+        producto.setDescripcion(productoDTO.getDescripcion());
+        producto.setPrecio(productoDTO.getPrecio());
+        producto.setCantidad(productoDTO.getCantidad());
+        producto.setImagenUrl(productoDTO.getImagenUrl());
+
+        Categoria categoria = categoriaService.buscarCatePorId(productoDTO.getCategoria().getId());
+        producto.setCategoria(categoria);
+
+        Producto updatedProducto = productoService.save(producto);
+
+        return ResponseEntity.ok(convertToDto(updatedProducto));
+    }
+
 
     private ProductoDTO convertToDto(Producto producto) {
         ProductoDTO productoDTO = new ProductoDTO();

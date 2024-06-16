@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { ProductoService } from '../../services/producto.service';
 import { Producto } from '../../models/producto';
 import { CommonModule } from '@angular/common';
@@ -19,7 +19,7 @@ export class ListaProductosComponent implements OnInit {
   productos: Producto[] = [];
   userId: number;
 
-  constructor(private productoService: ProductoService, private authService: AuthService) {
+  constructor(private productoService: ProductoService, private authService: AuthService, private router: Router) {
     this.userId = 0; // Inicialización
   }
 
@@ -56,6 +56,13 @@ export class ListaProductosComponent implements OnInit {
     this.productoService.deleteProducto(id).subscribe(() => {
       this.productos = this.productos.filter(producto => producto.id !== id);
     });
+  }
+  editProducto(productId: number): void {
+    this.router.navigate(['/editar-producto', productId]);
+  }
+
+  navigateToCreateProducto(): void {
+    this.router.navigate(['/producto']);
   }
 
   protected readonly of = of;

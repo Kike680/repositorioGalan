@@ -10,6 +10,7 @@ import java.util.List;
 @ToString(exclude ={"productos"})
 @AllArgsConstructor
 @NoArgsConstructor
+
 public class CategoriaDTO {
     private Long id;
     private String nombre;

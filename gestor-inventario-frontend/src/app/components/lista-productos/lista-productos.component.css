@@ -6,6 +6,11 @@
   margin-top: 10px;
 }
 
-.btn-danger {
+.btn-danger, .btn-primary {
   margin-top: 10px;
+}
+
+.btn-success {
+  display: block;
+  width: 100%;
 }

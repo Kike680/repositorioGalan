@@ -1,6 +1,6 @@
 <div class="container mt-4">
   <h2>Mis Productos</h2>
-  <ul class="list-group">
+  <ul class="list-group mb-4">
     @for (producto of productos; track productos) {
       <li class="list-group-item">
         <div class="d-flex justify-content-between align-items-center">
@@ -13,9 +13,13 @@
             <strong>Imagen:</strong>
             <img [src]="producto.imagenUrl" alt="{{ producto.nombre }}" class="img-thumbnail" width="100"><br>
           </div>
-          <button class="btn btn-danger" (click)="confirmDelete(producto.id!)">Eliminar</button>
+          <div>
+            <button class="btn btn-primary me-2" (click)="editProducto(producto.id!)">Modificar</button>
+            <button class="btn btn-danger" (click)="confirmDelete(producto.id!)">Eliminar</button>
+          </div>
         </div>
       </li>
     }
   </ul>
+  <button class="btn btn-success" (click)="navigateToCreateProducto()">Añadir Producto</button>
 </div>

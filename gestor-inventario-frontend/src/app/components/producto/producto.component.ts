@@ -1,13 +1,16 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { RouterLink } from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import { ProductoService } from '../../services/producto.service';
 import { FileUploadService } from '../../services/file-upload.service';
 import Swal from 'sweetalert2';
 import {Producto} from "../../models/producto";
 import {Categoria} from "../../models/categoria";
 import {AuthService} from "../../services/auth.service";
+import {MatFormField} from "@angular/material/form-field";
+import {MatOption, MatSelect} from "@angular/material/select";
+import {CategoriaService} from "../../services/categoria.service";
 
 @Component({
   selector: 'app-producto',
@@ -17,19 +20,30 @@ import {AuthService} from "../../services/auth.service";
   imports: [
     ReactiveFormsModule,
     HttpClientModule,
-    RouterLink
+    RouterLink,
+    MatFormField,
+    MatSelect,
+    MatOption
   ]
 })
 export class ProductoComponent {
   productoForm: FormGroup;
   selectedFile: File | null = null;
   base64Image!: string;
+  categorias: any[] = [];
 
+  ngOnInit(): void {
+    this.categoriaService.getCategorias().subscribe(data => {
+      this.categorias = data;
+    });
+  }
   constructor(
     private fb: FormBuilder,
     private productoService: ProductoService,
     private fileUploadService: FileUploadService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router,
+    private categoriaService: CategoriaService
   ) {
 
     //Para crear un producto no me interesa ponmerle cantidad
@@ -99,6 +113,9 @@ export class ProductoComponent {
         icon: 'error'
       });
     }
+  }
+  goBack(): void {
+    this.router.navigate(['/listaproductos']);
   }
 
 

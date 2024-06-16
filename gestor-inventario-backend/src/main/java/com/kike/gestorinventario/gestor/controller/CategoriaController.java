@@ -16,15 +16,25 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/categorias")
+@CrossOrigin("*")
 public class CategoriaController {
     @Autowired
     private CategoriaService categoriaService;
     @Autowired
     private ProductoService productoService;
 
+    /*@GetMapping
+    public ResponseEntity<List<CategoriaDTO>> findAll() {
+        return (ResponseEntity<List<CategoriaDTO>>) categoriaService.buscarTodasCategorias().stream().map(this::convertToDto).collect(Collectors.toList());
+    }*/
+
     @GetMapping
-    public List<CategoriaDTO> findAll() {
-        return categoriaService.buscarTodasCategorias().stream().map(this::convertToDto).collect(Collectors.toList());
+    public ResponseEntity<List<CategoriaDTO>> findAll() {
+        List<Categoria> categorias = categoriaService.buscarTodasCategorias();
+        List<CategoriaDTO> categoriaDTOs = categorias.stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(categoriaDTOs);
     }
 
     @GetMapping("/{id}")
@@ -50,7 +60,7 @@ public class CategoriaController {
         categoriaDTO.setId(categoria.getId());
         categoriaDTO.setNombre(categoria.getNombre());
         categoriaDTO.setDescripcion(categoria.getDescripcion());
-        categoriaDTO.setProductos(categoria.getProductos().stream().map(this::convertProductoToDto).collect(Collectors.toList()));
+       /* categoriaDTO.setProductos(categoria.getProductos().stream().map(this::convertProductoToDto).collect(Collectors.toList()));*/
         return categoriaDTO;
     }
 
@@ -62,7 +72,8 @@ public class CategoriaController {
         productoDTO.setPrecio(producto.getPrecio());
         productoDTO.setCantidad(producto.getCantidad());
         productoDTO.setImagenUrl(producto.getImagenUrl());
-        productoDTO.setCategoria(convertToDto(producto.getCategoria()));
+        /*productoDTO.setCategoria(convertToDto(producto.getCategoria()));*/
+        productoDTO.setCategoria(new CategoriaDTO(producto.getCategoria().getId(), producto.getCategoria().getNombre(), null, null));
         return productoDTO;
     }
 
