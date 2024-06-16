@@ -8,7 +8,7 @@ import { CategoriaService } from '../../services/categoria.service';
 import { Producto } from '../../models/producto';
 import { Categoria } from '../../models/categoria';
 import {FileUploadService} from "../../services/file-upload.service";
-import {HttpClient} from "@angular/common/http";
+
 
 @Component({
   selector: 'app-editar-producto',

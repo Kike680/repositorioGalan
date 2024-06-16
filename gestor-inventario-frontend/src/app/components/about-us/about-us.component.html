@@ -1,0 +1,129 @@
+<!--
+<div class="about-container">
+  <mat-card class="about-card">
+    <mat-card-header>
+      <mat-card-title>Sobre Nosotros</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        Bienvenido a MyApp. Somos una empresa dedicada a proporcionar soluciones innovadoras para la gestión de inventarios. Nuestro objetivo es facilitar la vida de nuestros usuarios a través de herramientas eficientes y fáciles de usar.
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button color="primary" (click)="showAlert()">Saber Más</button>
+    </mat-card-actions>
+  </mat-card>
+
+  <mat-grid-list cols="1" rowHeight="2:1">
+    <mat-grid-tile>
+      <mat-card class="about-card">
+        <mat-card-header>
+          <mat-card-title>Nuestra Historia</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>
+            MyApp fue fundada en 2020 con la visión de simplificar la gestión de inventarios. Desde entonces, hemos ayudado a cientos de empresas a mejorar sus procesos y aumentar su eficiencia.
+          </p>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <mat-card class="about-card">
+        <mat-card-header>
+          <mat-card-title>Nuestro Equipo</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>
+            Contamos con un equipo de profesionales apasionados y dedicados, comprometidos con la excelencia y la innovación.
+          </p>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <mat-card class="about-card">
+        <mat-card-header>
+          <mat-card-title>Nuestros Valores</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>
+            En MyApp, valoramos la integridad, la innovación y el compromiso con nuestros clientes.
+          </p>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
+-->
+<div class="about-container">
+  <mat-card class="about-card">
+    <mat-card-header>
+      <mat-card-title>Sobre Nosotros</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        Bienvenido a MyApp. Somos una empresa dedicada a proporcionar soluciones innovadoras para la gestión de inventarios. Nuestro objetivo es facilitar la vida de nuestros usuarios a través de herramientas eficientes y fáciles de usar.
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button color="primary" (click)="showAlert()">Saber Más</button>
+    </mat-card-actions>
+  </mat-card>
+
+  <mat-grid-list cols="1" rowHeight="2:1">
+    <mat-grid-tile>
+      <mat-card class="about-card">
+        <mat-card-header>
+          <mat-card-title>Nuestra Historia</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>
+            MyApp fue fundada en 2020 con la visión de simplificar la gestión de inventarios. Desde entonces, hemos ayudado a cientos de empresas a mejorar sus procesos y aumentar su eficiencia.
+          </p>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <mat-card class="about-card">
+        <mat-card-header>
+          <mat-card-title>Nuestro Equipo</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>
+            Contamos con un equipo de profesionales apasionados y dedicados, comprometidos con la excelencia y la innovación.
+          </p>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <mat-card class="about-card">
+        <mat-card-header>
+          <mat-card-title>Nuestros Valores</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>
+            En MyApp, valoramos la integridad, la innovación y el compromiso con nuestros clientes.
+          </p>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+  <!-- Añadir el carrusel aquí -->
+  <div class="carousel-container">
+    <owl-carousel-o [options]="customOptions">
+      <ng-template carouselSlide>
+        <img src="assets/image1.jpg" alt="Imagen 1">
+      </ng-template>
+      <ng-template carouselSlide>
+        <img src="assets/image2.jpg" alt="Imagen 2">
+      </ng-template>
+      <ng-template carouselSlide>
+        <img src="assets/image3.jpg" alt="Imagen 3">
+      </ng-template>
+    </owl-carousel-o>
+  </div>
+</div>

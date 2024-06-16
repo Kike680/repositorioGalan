@@ -8,7 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { AuthService } from '../../services/auth.service';
 import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
-import { Router } from '@angular/router'; // Asegúrate de importar el Router
+import {Router, RouterLink} from '@angular/router'; // Asegúrate de importar el Router
 
 @Component({
   selector: 'app-navbar',
@@ -20,31 +20,34 @@ import { Router } from '@angular/router'; // Asegúrate de importar el Router
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
-    FormsModule
+    FormsModule,
+    RouterLink
   ],
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  searchQuery: string = '';
+ /* searchQuery: string = '';
   options: string[] = ['Producto 1', 'Producto 2', 'Producto 3', 'Producto 4'];
-  filteredOptions: string[] = [];
+  filteredOptions: string[] = [];*/
 
   constructor(private authService: AuthService, private router: Router) {} // Añadir Router en el constructor
 
   ngOnInit() {
-    this.filteredOptions = this.options;
+    /*this.filteredOptions = this.options;*/
   }
+/*
 
   onSearchChange(event: Event) {
     const value = (event.target as HTMLInputElement).value.toLowerCase();
     this.filteredOptions = this.options.filter(option => option.toLowerCase().includes(value));
   }
+*/
 
-  onSearch() {
+ /* onSearch() {
     console.log('Buscando:', this.searchQuery);
     // Aquí puedes añadir la lógica para manejar la búsqueda, por ejemplo, redirigir a una página de resultados de búsqueda.
-  }
+  }*/
 
   logout(): void {
     Swal.fire({

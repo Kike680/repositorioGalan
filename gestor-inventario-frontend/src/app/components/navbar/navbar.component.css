@@ -1,36 +1,22 @@
+.navbar {
+  background-color: #343a40 !important;
+  padding: 0.5rem 1rem;
+}
 
-/* navbar.component.css */
-.navbar-brand img {
+.logo {
+  height: 40px;
   margin-right: 10px;
-  max-height: 24px;
 }
 
-.mat-toolbar-row {
-  display: flex;
-  justify-content: space-between;
+.navbar-nav .nav-item .nav-link {
+  color: #ffffff !important;
+  margin-right: 1rem;
 }
 
-.nav-link {
-  color: #fff;
-  margin-right: 15px;
-  cursor: pointer;
+.navbar-nav .nav-item .nav-link:hover {
+  color: #00bfff !important;
 }
 
-.nav-link:hover {
-  color: #bbb;
+.btn-outline-danger {
+  margin-left: auto;
 }
-
-.mat-form-field {
-  background-color: #495057;
-  color: #fff;
-}
-
-.mat-icon {
-  font-size: 1.2rem;
-  cursor: pointer;
-}
-
-.mat-icon:hover {
-  color: #bbb;
-}
-
