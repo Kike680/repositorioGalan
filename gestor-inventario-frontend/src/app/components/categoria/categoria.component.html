@@ -1,0 +1,37 @@
+<form [formGroup]="productoForm" class="container mt-5 p-4 bg-light rounded shadow-sm">
+  <div class="mb-3">
+    <mat-form-field appearance="fill" class="w-100">
+      <mat-label>Categoría</mat-label>
+      <mat-select id="categoria" formControlName="categoria" (selectionChange)="onCategoriaChange()">
+        <mat-option value="">Todas</mat-option>
+        @for (categoria of categorias; track categorias) {
+          <mat-option [value]="categoria.id">{{ categoria.nombre }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  </div>
+</form>
+
+<div class="container mt-4">
+  <h2 class="mb-4">Productos</h2>
+  <div class="list-group mb-4">
+    @for (producto of productos; track productos) {
+      <mat-card class="list-group-item mb-3 shadow-sm">
+        <mat-card-content>
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <p><strong>Nombre:</strong> {{ producto.nombre }}</p>
+              <p><strong>Descripción:</strong> {{ producto.descripcion }}</p>
+              <p><strong>Precio:</strong> {{ producto.precio }}</p>
+              <p><strong>Cantidad:</strong> {{ producto.cantidad }}</p>
+              <p><strong>Categoría:</strong> {{ producto.categoria?.nombre }}</p>
+            </div>
+            <div>
+              <img [src]="producto.imagenUrl" alt="{{ producto.nombre }}" class="img-thumbnail" width="100">
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    }
+  </div>
+</div>

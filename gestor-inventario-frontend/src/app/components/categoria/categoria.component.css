@@ -1,0 +1,29 @@
+.container {
+  max-width: 800px;
+}
+
+mat-card {
+  border-radius: 8px;
+}
+
+h2 {
+  color: #343a40;
+}
+
+form {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+mat-card-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.example-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+}

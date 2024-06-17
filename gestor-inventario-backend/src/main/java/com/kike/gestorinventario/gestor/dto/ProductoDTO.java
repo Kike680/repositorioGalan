@@ -1,5 +1,6 @@
 package com.kike.gestorinventario.gestor.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.kike.gestorinventario.gestor.security.dto.UsuarioDTO;
 import lombok.*;
 

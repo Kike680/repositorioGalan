@@ -118,6 +118,15 @@ public class ProductoController {
         return ResponseEntity.ok(convertToDto(updatedProducto));
     }
 
+    @GetMapping("/categoria/{categoriaId}")
+    public ResponseEntity<List<ProductoDTO>> obtenerProductosPorCategoria(@PathVariable Long categoriaId) {
+        List<Producto> productos = productoService.buscarProductPorCategoriaId(categoriaId);
+        List<ProductoDTO> productoDTOs = productos.stream()
+                .map(this::convertToDto)
+                .toList();
+        return ResponseEntity.ok(productoDTOs);
+    }
+
 
     private ProductoDTO convertToDto(Producto producto) {
         ProductoDTO productoDTO = new ProductoDTO();

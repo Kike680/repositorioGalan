@@ -32,6 +32,7 @@ public class SecurityConfig {
                         //Cuando accedas a este controller
                         .requestMatchers("/api/productos/user/**").permitAll()
                         .requestMatchers("/api/productos/").permitAll()
+                        .requestMatchers("api/productos/**").authenticated()
                         .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers("/api/auth/login").permitAll()
                         .requestMatchers("/api/auth/register").permitAll()
