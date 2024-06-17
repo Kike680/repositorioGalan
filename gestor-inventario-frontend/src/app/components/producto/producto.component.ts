@@ -60,20 +60,12 @@ export class ProductoComponent implements OnInit{
       imagen:['', Validators.required],
     });
   }
-
   ngOnInit(): void {
     this.categoriaService.getCategorias().subscribe(
       data => this.categorias = data,
       error => console.error('Error al obtener categorías', error)
     );
   }
-
-
-
-
-
-
-
   onFileSelected(event: Event): void {
     const fileInput = event.target as HTMLInputElement;
 
@@ -90,7 +82,6 @@ export class ProductoComponent implements OnInit{
       reader.readAsDataURL(file);
     }
   }
-
   onSubmit(): void {
     console.log(this.productoForm);
     this.productoForm.markAllAsTouched();

@@ -11,6 +11,7 @@ import {JwtHelperService} from "@auth0/angular-jwt";
 })
 export class AuthService {
 
+  loginSuccess: BehaviorSubject<boolean>= new BehaviorSubject<boolean>(false);
   currentSession: BehaviorSubject<Boolean> = new BehaviorSubject<Boolean>(false);
   sessionToken: BehaviorSubject<String> = new BehaviorSubject<String>('');
   sessionUser: BehaviorSubject<Usuario | null>  = new BehaviorSubject<Usuario | null>(null);
@@ -27,6 +28,10 @@ export class AuthService {
   }
 
   private baseUrl= 'http://localhost:8080/api/auth';
+
+
+
+
 
 
   constructor(private http:HttpClient, private router:Router, private cookieService:CookieService, private jwtHelper: JwtHelperService) { }
@@ -67,6 +72,7 @@ export class AuthService {
               phone: decodedToken.user.phone,
 
             };
+            this.loginSuccess.next(true);
             //Para iniciar sesion directamente con la ayuda del interceptor
             this.sessionToken.next(response.token);
             this.sessionUser.next(user);
@@ -100,6 +106,7 @@ export class AuthService {
     logout(){
      this.cookieService.delete("token");
       this.cookieService.delete("user");
+      this.loginSuccess.next(false);
       this.router?.navigate(['/login']);
     }
 
@@ -108,11 +115,6 @@ export class AuthService {
 
     }
 
-    //Este metodo tendre que usarlo cuando me requiera traerme el usuario para poder obtener datos suyos
-  getUser(): Usuario | null {
-    const user = this.cookieService.get('user');
-    return user ? JSON.parse(user) : null;
-  }
     isAuthenticated():boolean{
       const token = this.getToken();
       //El !! convierte ese valor a booleano hace lo mismo que un ternario
@@ -123,7 +125,9 @@ export class AuthService {
       console.error('Error en la solicitud : ', error);
       return throwError(() => error);
     }
-
+  getBehaviourSubjet():Observable<boolean>{
+    return this.loginSuccess.asObservable()
+  }
   public  getUserInfoCookie():any{
       const token = this.getToken();
     if (token != null) {
@@ -140,7 +144,6 @@ export class AuthService {
     return null;
 
   }
-
   public getUserIdFromCookie(): any {
     const token = this.getToken();
     if (token != null) {
@@ -150,6 +153,8 @@ export class AuthService {
     }
     return null;
   }
+
+
 
 
 

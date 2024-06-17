@@ -21,12 +21,12 @@ export class ProductoService {
   getProductById(id: number): Observable<Producto> {
     return this.http.get<Producto>(`${this.baseUrl}/${id}`);
   }
-
+  //Endpoint para traer todos los productos por categorias
   getProductosPorCategoria(categoriaId: number): Observable<any[]> {
     return this.http.get<any[]>(`${this.baseUrl}/categoria/${categoriaId}`);
   }
 
-
+  //EndPoint para borrar el producto
   deleteProducto(id: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }

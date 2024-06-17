@@ -16,10 +16,10 @@ export const routes: Routes = [
   {path:'register',component:RegisterComponent},
   {path:'home', component:HomeComponent, canActivate: [authGuard]},
   {path:'producto', component:ProductoComponent, canActivate: [authGuard]},
-  {path:'listaproductos', component:ListaProductosComponent, canActivate: [authGuard]},
+  {path:'listaproductos', component:ListaProductosComponent, canActivate: [authGuard], data:["ROLE_USER", "ROLE_ADMIN"]},
   {path:'editarproducto/:id', component:EditarProductoComponent, canActivate: [authGuard]},
   {path:'about-us', component:AboutUsComponent, canActivate: [authGuard]},
-  {path:'categoria', component:CategoriaComponent, canActivate: [authGuard]}
+  {path:'categoria', component:CategoriaComponent, canActivate: [authGuard], data:["ROLE_USER", "ROLE_ADMIN"]}
 
 
 ];

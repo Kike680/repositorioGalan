@@ -70,7 +70,6 @@ public class AuthController {
         Usuario usuario = new Usuario();
         usuario.setUsername(registroRequest.getUsername());
         usuario.setPassword(passwordEncoder.encode(registroRequest.getPassword()));
-        //Esta dos lineas son las nuevas
         usuario.setEmail(registroRequest.getEmail());
         usuario.setPhone(registroRequest.getPhone());
 
@@ -90,16 +89,3 @@ public class AuthController {
     }
 
 }
-//Este for iria debajo del Set<Rol> roles
-//Recorremos RolEnum, es recorrer los roles que le estamos pasando por el request a la hora registar, por cada rol que vayamos recorriendo, vamos a ir buscando por nombre si coinciden con los nombres del ENUM
-//De lo que estamos obteniendo, si es que este rolObj existe en estos Enum entonces vamos a agregarlo
-/*        if(registroRequest.getRoles() !=null){
-            for(RolEnum rolEnum : registroRequest.getRoles()){
-                Rol rolObj = rolRepository.findByNombre(rolEnum.name());
-                if(rolObj != null){
-                    roles.add(rolObj);
-
-                }
-            }
-            usuario.setRoles(roles);
-        }*/

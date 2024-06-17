@@ -51,37 +51,6 @@ export class EditarProductoComponent implements OnInit {
 
   }
 
-
- /* ngOnInit(): void {
-    this.categoriaService.getCategorias().subscribe(
-      data => this.categorias = data,
-      error => console.error('Error al obtener categorías', error)
-    );
-    this.route.paramMap.subscribe(params => {
-      const id = params.get('id');
-      if (id) {
-        this.productId = +id;
-
-        this.productoService.getProductById(parseInt(id)).subscribe(
-          (data: Producto) => {
-            this.producto = data;
-            this.productoForm = this.fb.group({
-              nombre: [this.producto?.nombre, Validators.required],
-              descripcion: [this.producto?.descripcion, Validators.required],
-              precio: [this.producto?.precio, Validators.required],
-              cantidad: [this.producto?.cantidad, Validators.required],
-              categoria: [this.producto?.categoria?.nombre, Validators.required],
-              imagen:[this.producto?.imagenUrl, Validators.required],
-
-            });
-            this.base64Image = this.producto?.imagenUrl;
-          }
-        )
-      }
-    });
-    //Para crear un producto no me interesa ponmerle cantidad
-
-  }*/
   ngOnInit(): void {
     this.categoriaService.getCategorias().subscribe(
       data => this.categorias = data,
@@ -148,8 +117,8 @@ export class EditarProductoComponent implements OnInit {
       this.fileUploadService.upload(producto).subscribe({
         next: (event: any) => {
           Swal.fire({
-            title: 'Producto creado',
-            text: 'El producto se ha creado correctamente',
+            title: 'Producto modificado',
+            text: 'El producto se ha modificado correctamente',
             icon: 'success'
           });
           this.editarProductoForm.reset();

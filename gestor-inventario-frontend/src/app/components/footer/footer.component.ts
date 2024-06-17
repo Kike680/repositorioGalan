@@ -15,7 +15,7 @@ export class FooterComponent {
   showAlert() {
     Swal.fire({
       title: 'Subscribe',
-      text: 'Thank you for subscribing to our newsletter!',
+      text: 'Gracias por suscribirte a nuestro sistema de notificaciones!',
       icon: 'success',
       confirmButtonText: 'Close'
     });

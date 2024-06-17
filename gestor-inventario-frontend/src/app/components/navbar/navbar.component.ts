@@ -27,27 +27,16 @@ import {Router, RouterLink} from '@angular/router'; // Asegúrate de importar el
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
- /* searchQuery: string = '';
-  options: string[] = ['Producto 1', 'Producto 2', 'Producto 3', 'Producto 4'];
-  filteredOptions: string[] = [];*/
+  token:boolean = false;
 
-  constructor(private authService: AuthService, private router: Router) {} // Añadir Router en el constructor
+  constructor(private authService: AuthService, private router: Router) {
+    authService.getBehaviourSubjet().subscribe(data => {
+      this.token=data;
+    })
 
+  }
   ngOnInit() {
-    /*this.filteredOptions = this.options;*/
   }
-/*
-
-  onSearchChange(event: Event) {
-    const value = (event.target as HTMLInputElement).value.toLowerCase();
-    this.filteredOptions = this.options.filter(option => option.toLowerCase().includes(value));
-  }
-*/
-
- /* onSearch() {
-    console.log('Buscando:', this.searchQuery);
-    // Aquí puedes añadir la lógica para manejar la búsqueda, por ejemplo, redirigir a una página de resultados de búsqueda.
-  }*/
 
   logout(): void {
     Swal.fire({
@@ -71,5 +60,8 @@ export class NavbarComponent implements OnInit {
         });
       }
     })
+  }
+  login(): void {
+    this.router.navigate(['/login']);
   }
 }

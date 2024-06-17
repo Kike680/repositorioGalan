@@ -49,7 +49,7 @@ public class JwtUtil {
 
     private String createToken(Map<String, Object> claims,UsuarioDTO usuarioDTO) {
 
-        //Aqui estamos creando un tocker //Acordarme por si da fallos por la injeccion que dice Ousama
+        //Aqui estamos creando un tocker //Acordarme por si da fallos por la injeccion
         return Jwts.builder()
                 .claims(claims)
                 .claim("user", usuarioDTO)

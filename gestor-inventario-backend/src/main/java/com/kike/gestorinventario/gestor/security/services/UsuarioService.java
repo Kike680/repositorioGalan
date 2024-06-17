@@ -25,11 +25,6 @@ public class UsuarioService {
         return usuarioRepository.findByUsername(username);
     }
 
- /*   @Transactional
-    public Optional<Usuario> findById(Long id) {
-        return usuarioRepository.findById(id);
-    }*/
-
     @Transactional
     public Usuario guardarUsuario(Usuario usuario) {
         usuario.setUsername(usuario.getUsername());

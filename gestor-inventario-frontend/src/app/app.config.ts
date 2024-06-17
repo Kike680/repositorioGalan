@@ -18,7 +18,7 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(JwtModule.forRoot({
       config: {
         tokenGetter: () => {
-          return localStorage.getItem('token'); // O el método que uses para obtener el token
+          return localStorage.getItem('token'); //método que use para obtener el token
         }
       }
     })),
